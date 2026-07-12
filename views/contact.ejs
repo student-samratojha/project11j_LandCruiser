@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Land Cruiser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes shine {
+        from {
+          background-position: 200% center;
+        }
+        to {
+          background-position: -200% center;
+        }
+      }
+      .sem {
+        position: relative;
+      }
+      .sem::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        width: 95%;
+        height: 1px;
+        background: #c084fc;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .sem:hover::after {
+        bottom: -2px;
+        opacity: 1;
+      }
+      .sem:hover {
+        color: #c084fc;
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white font-sans overflow-x-hidden min-h-screen flex flex-col justify-between">
+    <section class="relative min-h-screen flex flex-col">
+      <!-- Background Image and Overlays (Consistent with home page) -->
+      <img
+        src="/heros.png"
+        class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+      />
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black"></div>
+      <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_35%,rgba(0,0,0,.3)_70%,rgba(0,0,0,.75)_100%)]"></div>
+
+      <!-- Navigation Bar -->
+      <nav class="relative top-0 left-0 z-50 w-full bg-black/10 backdrop-blur-xl border-b border-white/5 font-[Inter]">
+        <div class="mx-auto max-w-7xl flex items-center justify-between px-6 py-5">
+          <!-- Logo -->
+          <a
+            href="/"
+            class="animate-[shine_7s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E_20%,#8A2BE2_50%,#D8B4FE_75%,#000)] bg-[length:200%_100%] bg-clip-text text-transparent text-lg font-extrabold tracking-[.35em] uppercase"
+          >
+            LAND CRUISER
+          </a>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-8 uppercase text-sm tracking-[.22em] text-white/70">
+            <a class="sem" href="/secure/user">Dashboard</a>
+
+          
+          </div>
+
+          <!-- Mobile Toggle Button -->
+          <div class="md:hidden flex items-center gap-3">
+            <a href="/auth/login" class="text-sm border border-white/20 px-3 py-1 rounded-full text-white/90">
+              Login
+            </a>
+            <button id="menu-btn" class="text-2xl focus:outline-none z-50 relative p-1 text-white">
+              ☰
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 uppercase text-base tracking-[.25em] text-white/80 transition-all duration-300">
+          <a class="sem py-2 text-lg" href="/">Home</a>
+          <a class="sem py-2 text-lg" href="/about">About</a>
+          <a class="sem py-2 text-lg" href="/contact/models">Models</a>
+          <a class="sem py-2 text-lg" href="/gallery">Gallery</a>
+          <a class="sem py-2 text-lg" href="/contact">Contact</a>
+          
+          <div class="flex flex-col w-full px-12 gap-4 mt-6">
+            <a href="/auth/login" class="text-center border border-white/20 py-3 rounded-full hover:border-violet-400 hover:text-violet-300 transition">
+              Login
+            </a>
+            <a href="/auth/register" class="text-center rounded-full bg-violet-600 py-3 text-white hover:bg-violet-500 transition">
+              Register
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Section Container -->
+      <main class="relative z-10 max-w-7xl mx-auto w-full px-6 py-12 md:py-16 flex-grow flex flex-col justify-center">
+        
+        <!-- Section Title & Badge -->
+        <div class="text-center mb-12">
+          <div class="inline-block rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(138,43,226,.18)] px-5 py-2 text-[11px] uppercase tracking-[.35em] animate-[shine_9s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E,#8A2BE2,#D8B4FE,#000)] bg-[length:200%_100%] bg-clip-text text-transparent">
+            Get In Touch
+          </div>
+          <h1 class="mt-4 text-3xl font-light sm:text-4xl md:text-5xl leading-tight bg-[linear-gradient(90deg,#fff,#d8b4fe,#8A2BE2)] bg-clip-text text-transparent">
+            Connect With <span class="font-semibold">Our Concierge</span>
+          </h1>
+          <p class="mt-3 max-w-xl mx-auto text-sm sm:text-base text-gray-300 italic">
+            Have questions about specifications, availability, or custom options? We are here to assist.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+          <!-- Form Section -->
+          <div class="lg:col-span-7 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 shadow-[0_0_30px_rgba(138,43,226,0.05)]">
+            <form action="/contact" method="POST" class="space-y-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <input
+                  name="name"
+                  required
+                  placeholder="Full Name"
+                  class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white placeholder-white/40"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Email Address"
+                  class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white placeholder-white/40"
+                />
+              </div>
+              
+              <div class="grid sm:grid-cols-2 gap-4">
+                <input
+                  name="subject"
+                  placeholder="Subject"
+                  class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white placeholder-white/40"
+                />
+                <input
+                  name="carModel"
+                  placeholder="Car Model (e.g. LC300 GR Sport)"
+                  class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white placeholder-white/40"
+                />
+              </div>
+
+              <select
+                name="rating"
+                class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white/70 appearance-none cursor-pointer"
+              >
+                <option value="" class="bg-zinc-900 text-white/40">Select Ownership / Product Rating</option>
+                <option value="5" class="bg-zinc-900">5 ★★★★★ Excellent</option>
+                <option value="4" class="bg-zinc-900">4 ★★★★☆ Very Good</option>
+                <option value="3" class="bg-zinc-900">3 ★★★☆☆ Average</option>
+                <option value="2" class="bg-zinc-900">2 ★★☆☆☆ Below Average</option>
+                <option value="1" class="bg-zinc-900">1 ★☆☆☆☆ Poor</option>
+              </select>
+
+              <textarea
+                name="message"
+                required
+                rows="4"
+                placeholder="Write your comprehensive message here..."
+                class="w-full rounded-xl bg-black/50 p-3.5 border border-white/10 focus:border-[#8A2BE2]/50 focus:outline-none transition text-sm text-white placeholder-white/40 resize-none"
+              ></textarea>
+
+              <div class="flex flex-wrap sm:flex-nowrap gap-3 pt-2">
+                <button type="submit" class="w-full sm:w-auto rounded-full border border-[#8A2BE2]/40 text-sm font-semibold bg-[#8A2BE2]/20 px-8 py-3 hover:bg-[#8A2BE2]/40 hover:shadow-[0_0_12px_rgba(138,43,226,.5)] transition">
+                  Send Message
+                </button>
+                <button
+                  type="reset"
+                  class="w-full sm:w-auto rounded-full border border-white/10 text-sm bg-white/5 px-6 py-3 hover:border-white/30 transition text-gray-300"
+                >
+                  Reset Form
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Info Details & Media Sidebar -->
+          <div class="lg:col-span-5 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 space-y-6 shadow-[0_0_30px_rgba(138,43,226,0.05)]">
+            <div class="border-b border-white/5 pb-4">
+              <h2 class="text-xl font-semibold tracking-wide text-white/90">Contact Details</h2>
+              <p class="mt-2 text-sm text-gray-400 flex items-center justify-between"><span>Email:</span> <span class="text-white font-medium">sales@example.com</span></p>
+              <p class="mt-1 text-sm text-gray-400 flex items-center justify-between"><span>Phone:</span> <span class="text-white font-medium">+1 800 555 0123</span></p>
+            </div>
+            
+            <div class="space-y-3">
+              <h2 class="text-xl font-semibold tracking-wide text-white/90">HQ Location</h2>
+              <div class="rounded-xl overflow-hidden border border-white/10 bg-black aspect-video relative group">
+                <img
+                  src="/about.png"
+                  alt="Office Location Preview"
+                  class="w-full h-full object-cover group-hover:scale-102 transition duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer Area -->
+      <footer class="relative z-10 border-t border-white/5 bg-black/95 w-full mt-12">
+        <div class="mx-auto max-w-7xl px-6 py-8 text-center text-xs tracking-widest text-white/40 uppercase">
+          © 2026 Signature Edition Land Cruiser — All rights reserved.
+        </div>
+      </footer>
+    </section>
+
+    <!-- Mobile Menu Script Toggle -->
+    <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+      });
+    </script>
+  </body>
+</html>

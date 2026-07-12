@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Add Model - Land Cruiser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes shine {
+        from {
+          background-position: 200% center;
+        }
+        to {
+          background-position: -200% center;
+        }
+      }
+      .sem {
+        position: relative;
+      }
+      .sem:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: #c084fc;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .sem:hover:after {
+        opacity: 1;
+      }
+      .sem:hover {
+        color: #c084fc;
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white overflow-x-hidden">
+    <section class="relative min-h-screen">
+      <img
+        src="/heros.png"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/60"></div>
+      <nav
+        class="absolute top-0 left-0 z-50 w-full bg-black/10 backdrop-blur-xl border-b border-white/5"
+      >
+        <div
+          class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5"
+        >
+          <a
+            href="/"
+            class="animate-[shine_7s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E,#8A2BE2,#D8B4FE,#000)] bg-[length:200%_100%] bg-clip-text text-transparent text-lg font-bold tracking-[.35em] uppercase"
+            >LAND CRUISER</a
+          >
+          <a
+            href="/secure/admin"
+            class="border border-white/20 rounded-full px-5 py-2"
+            >Dashboard</a
+          >
+        </div>
+      </nav>
+
+      <div class="relative z-10 pt-32 pb-16 px-6">
+        <div
+          class="max-w-4xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8"
+        >
+          <h1 class="text-4xl font-light mb-2">Add New Model</h1>
+          <p class="text-white/60 mb-8">Create a premium Land Cruiser model.</p>
+
+          <form
+            action="/secure/add"
+            method="POST"
+            class="grid md:grid-cols-2 gap-5"
+          >
+            <input
+              name="modelName"
+              required
+              placeholder="Model Name"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="slug"
+              required
+              placeholder="Slug"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="tagline"
+              placeholder="Tagline"
+              class="bg-black/40 border border-white/10 rounded-xl p-3 md:col-span-2"
+            />
+            <textarea
+              name="description"
+              required
+              rows="4"
+              placeholder="Description"
+              class="bg-black/40 border border-white/10 rounded-xl p-3 md:col-span-2"
+            ></textarea>
+            <input
+              type="number"
+              name="price"
+              required
+              placeholder="Price"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="year"
+              required
+              placeholder="Year"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              type="url"
+              name="image"
+              required
+              placeholder="Image URL"
+              class="bg-black/40 border border-white/10 rounded-xl p-3 md:col-span-2"
+            />
+            <input
+              name="engine"
+              placeholder="Engine"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="horsepower"
+              placeholder="Horsepower"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="torque"
+              placeholder="Torque"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="mileage"
+              placeholder="Mileage"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="topSpeed"
+              placeholder="Top Speed"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="seatingCapacity"
+              placeholder="Seating Capacity"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="transmission"
+              placeholder="Transmission"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="fuelType"
+              placeholder="Fuel Type"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="color"
+              placeholder="Color"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+            <input
+              name="driveType"
+              placeholder="Drive Type"
+              class="bg-black/40 border border-white/10 rounded-xl p-3"
+            />
+
+            <label class="md:col-span-2"
+              ><input type="checkbox" name="featured" value="true" />
+              Featured</label
+            >
+            <label class="md:col-span-2"
+              ><input type="checkbox" name="available" value="true" checked />
+              Available</label
+            >
+
+            <div class="md:col-span-2 flex gap-4">
+              <button
+                class="flex-1 bg-violet-600 hover:bg-violet-500 rounded-xl py-3"
+              >
+                Save Model
+              </button>
+              <a
+                href="/secure/admin"
+                class="flex-1 text-center border border-white/20 rounded-xl py-3"
+                >Cancel</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

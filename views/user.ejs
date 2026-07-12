@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard — Land Cruiser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes shine {
+        from {
+          background-position: 200% center;
+        }
+        to {
+          background-position: -200% center;
+        }
+      }
+      .sem {
+        position: relative;
+      }
+      .sem::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        width: 95%;
+        height: 1px;
+        background: #c084fc;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .sem:hover::after {
+        bottom: -2px;
+        opacity: 1;
+      }
+      .sem:hover {
+        color: #c084fc;
+      }
+    </style>
+  </head>
+
+  <body class="bg-black text-white font-sans min-h-screen flex flex-col justify-between overflow-x-hidden">
+    <div class="relative min-h-screen flex flex-col">
+      <!-- Background Image and Overlays -->
+      <img
+        src="/heros.png"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
+      />
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black"></div>
+      <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_35%,rgba(0,0,0,.3)_70%,rgba(0,0,0,.75)_100%)]"></div>
+
+      <!-- Navigation -->
+      <nav class="relative top-0 left-0 z-50 w-full bg-black/10 backdrop-blur-xl border-b border-white/5 font-[Inter]">
+        <div class="mx-auto max-w-7xl flex items-center justify-between px-6 py-5">
+          <a
+            href="/"
+            class="animate-[shine_7s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E_20%,#8A2BE2_50%,#D8B4FE_75%,#000)] bg-[length:200%_100%] bg-clip-text text-transparent text-lg font-extrabold tracking-[.35em] uppercase"
+          >
+            LAND CRUISER
+          </a>
+
+          <div class="hidden md:flex items-center gap-8 uppercase text-sm tracking-[.22em] text-white/70">
+            <a class="sem" href="/">Home</a>
+            <a class="sem" href="/about">About</a>
+            <a class="sem" href="/contact/models">Models</a>
+            <a class="sem" href="/gallery">Gallery</a>
+            <a class="sem" href="/contact">Contact</a>
+
+            <a
+              href="/auth/logout"
+              class="border border-white/20 px-5 py-2 rounded-full hover:border-violet-400 hover:text-violet-300 transition"
+            >
+              Logout
+            </a>
+          </div>
+
+          <div class="md:hidden flex items-center gap-3">
+            <a href="/auth/logout" class="text-sm border border-white/20 px-3 py-1 rounded-full text-white/90">
+              Logout
+            </a>
+            <button id="menu-btn" class="text-2xl focus:outline-none z-50 relative p-1">
+              ☰
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 uppercase text-base tracking-[.25em] text-white/80">
+          <a class="sem py-2 text-lg" href="/">Home</a>
+          <a class="sem py-2 text-lg" href="/about">About</a>
+          <a class="sem py-2 text-lg" href="/contact/models">Models</a>
+          <a class="sem py-2 text-lg" href="/gallery">Gallery</a>
+          <a class="sem py-2 text-lg" href="/contact">Contact</a>
+          <div class="flex flex-col w-full px-12 gap-4 mt-6">
+            <a href="/auth/logout" class="text-center border border-white/20 py-3 rounded-full hover:border-violet-400 hover:text-violet-300 transition">
+              Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Dashboard Content -->
+      <main class="relative z-10 mx-auto max-w-5xl w-full px-6 py-12 flex-grow flex flex-col gap-10">
+        
+        <!-- Header Info -->
+        <div>
+          <div class="inline-block rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_0_30px_rgba(138,43,226,.18)] px-5 py-2 text-[11px] uppercase tracking-[.35em] animate-[shine_9s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E,#8A2BE2,#D8B4FE,#000)] bg-[length:200%_100%] bg-clip-text text-transparent">
+            User Workspace
+          </div>
+          <h1 class="mt-4 text-3xl font-light sm:text-4xl md:text-5xl leading-tight bg-[linear-gradient(90deg,#fff,#d8b4fe,#8A2BE2)] bg-clip-text text-transparent">
+            Welcome, <span class="font-semibold"><%= user.name %></span>
+          </h1>
+        </div>
+
+        <!-- Section 1: Profile Card -->
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-10 backdrop-blur-xl shadow-[0_0_30px_rgba(138,43,226,0.05)]">
+          <div class="flex flex-col items-center gap-8 md:flex-row md:items-start">
+            <div class="relative group">
+              <div class="absolute inset-0 bg-violet-600 rounded-full blur-[10px] opacity-20 transition"></div>
+              <img
+                src="<%= user.profilePic || '/default-user.png' %>"
+                alt="Profile"
+                class="relative h-36 w-36 sm:h-40 sm:w-40 rounded-full border-2 border-[#8A2BE2]/40 object-cover shadow-2xl"
+              />
+            </div>
+
+            <div class="flex-1 w-full">
+              <div class="text-center md:text-left mb-6">
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-wide text-white/90"><%= user.name %></h2>
+                <p class="text-sm text-gray-400 italic mt-1"><%= user.email %></p>
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-xl border border-white/5 bg-white/5 p-5">
+                  <p class="text-xs uppercase tracking-wider text-white/40">Full Name</p>
+                  <h3 class="mt-1.5 text-base font-medium text-white/90"><%= user.name %></h3>
+                </div>
+                <div class="rounded-xl border border-white/5 bg-white/5 p-5">
+                  <p class="text-xs uppercase tracking-wider text-white/40">Email Address</p>
+                  <h3 class="mt-1.5 text-base font-medium text-white/90 break-all"><%= user.email %></h3>
+                </div>
+                <div class="rounded-xl border border-white/5 bg-white/5 p-5">
+                  <p class="text-xs uppercase tracking-wider text-white/40">Role Privilege</p>
+                  <h3 class="mt-1.5 text-sm font-semibold text-[#C084FC] uppercase tracking-widest"><%= user.role %></h3>
+                </div>
+                <div class="rounded-xl border border-white/5 bg-white/5 p-5">
+                  <p class="text-xs uppercase tracking-wider text-white/40">Member Since</p>
+                  <h3 class="mt-1.5 text-base font-medium text-white/90"><%= new Date(user.createdAt).toDateString() %></h3>
+                </div>
+              </div>
+
+              <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                <a href="/profile/edit" class="rounded-full text-center border border-[#8A2BE2]/40 text-sm bg-[#8A2BE2]/20 px-8 py-2.5 backdrop-blur-xl hover:bg-[#8A2BE2]/40 transition w-full sm:w-auto font-medium">Edit Profile</a>
+                <a href="/auth/logout" class="rounded-full text-center border border-red-500/30 text-sm bg-red-500/10 px-8 py-2.5 backdrop-blur-xl hover:bg-red-500/20 hover:text-red-300 transition w-full sm:w-auto">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Dynamic Contact Schema Details -->
+        <div>
+          <h2 class="text-xl font-light uppercase tracking-[0.25em] text-white/80 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#8A2BE2]"></span> Submission Details
+          </h2>
+          
+          <% if (typeof contact !== 'undefined' && contact) { %>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-xl shadow-lg flex flex-col md:flex-row gap-8 items-start">
+              
+              <!-- Car/Attachment Preview Image -->
+              <% if (contact.carPic) { %>
+                <div class="w-full md:w-64 shrink-0 rounded-2xl overflow-hidden border border-white/10 bg-black aspect-video md:aspect-square relative group">
+                  <img src="<%= contact.carPic %>" alt="Submitted Attachment" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                  <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase tracking-widest text-violet-300 border border-white/5">
+                    Uploaded File
+                  </div>
+                </div>
+              <% } %>
+
+              <!-- Main Submission Info Details -->
+              <div class="flex-1 w-full grid gap-6">
+                <div>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-[#C084FC]"><%= contact.subject || "General Inquiry" %></span>
+                  <p class="text-gray-300 italic text-sm mt-2 bg-white/5 border border-white/5 p-4 rounded-xl leading-relaxed">
+                    "<%= contact.message %>"
+                  </p>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                  <!-- Car Model Info -->
+                  <% if (contact.carModel) { %>
+                    <div class="bg-black/20 border border-white/5 rounded-xl p-4">
+                      <p class="text-[10px] uppercase tracking-wider text-white/40">Interested / Owned Model</p>
+                      <p class="text-sm font-medium mt-1 text-white/90"><%= contact.carModel %></p>
+                    </div>
+                  <% } %>
+
+                  <!-- Ownership Status -->
+                  <div class="bg-black/20 border border-white/5 rounded-xl p-4">
+                    <p class="text-[10px] uppercase tracking-wider text-white/40">Ownership Status</p>
+                    <p class="text-sm font-semibold mt-1 flex items-center gap-1.5 <%= contact.isOwn ? 'text-emerald-400' : 'text-amber-400' %>">
+                      <span class="w-1.5 h-1.5 rounded-full <%= contact.isOwn ? 'bg-emerald-400' : 'bg-amber-400' %>"></span>
+                      <%= contact.isOwn ? 'Current Owner' : 'Prospective Buyer' %>
+                    </p>
+                  </div>
+
+                  <!-- Feedback Rating -->
+                  <% if (contact.rating) { %>
+                    <div class="bg-black/20 border border-white/5 rounded-xl p-4">
+                      <p class="text-[10px] uppercase tracking-wider text-white/40">Experience Rating</p>
+                      <div class="flex items-center gap-1 mt-1.5 text-violet-400">
+                        <% for(let i=1; i<=5; i++) { %>
+                          <span class="text-sm"><%= i <= contact.rating ? '★' : '☆' %></span>
+                        <% } %>
+                        <span class="text-xs text-white/70 ml-1">(<%= contact.rating %>/5)</span>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+
+                <div class="text-[11px] text-white/40 uppercase tracking-widest flex items-center justify-between border-t border-white/5 pt-4">
+                  <span>Sent via: <%= contact.email %></span>
+                  <span><%= new Date(contact.createdAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+
+            </div>
+          <% } else { %>
+            <!-- No Contact Request Found State -->
+            <div class="rounded-3xl border border-dashed border-white/10 bg-white/5 p-8 text-center backdrop-blur-sm">
+              <p class="text-gray-400 italic text-sm">No recent messages, test drive requests, or feedback logs found from your account.</p>
+              <a href="/contact" class="inline-block mt-4 text-xs uppercase tracking-widest text-[#C084FC] hover:underline font-medium">
+                Submit a Query →
+              </a>
+            </div>
+          <% } %>
+        </div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="relative z-10 border-t border-white/5 bg-black/95 w-full">
+        <div class="mx-auto max-w-7xl px-6 py-8 text-center text-xs tracking-widest text-white/40 uppercase">
+          © 2026 Signature Edition Land Cruiser — All rights reserved.
+        </div>
+      </footer>
+    </div>
+
+    <!-- Mobile Menu Handler -->
+    <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? '☰' : '✕';
+      });
+    </script>
+  </body>
+</html>

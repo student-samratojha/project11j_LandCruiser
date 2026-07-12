@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — Land Cruiser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+<body class="bg-black text-white overflow-x-hidden">
+
+<div class="relative min-h-screen flex items-end pb-4 justify-center">
+
+    <!-- Background -->
+    <img src="/heros.png"
+        class="absolute inset-0 h-full w-full object-cover object-center">
+
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black"></div>
+
+    <!-- Navbar -->
+    <nav
+        class="absolute top-0 left-0 z-50 w-full bg-black/10 backdrop-blur-xl border-b border-white/5">
+
+        <div class="mx-auto max-w-7xl flex items-center justify-between px-6 py-5">
+
+            <a href="/"
+                class="animate-[shine_7s_linear_infinite] bg-[linear-gradient(90deg,#000,#1A0B2E,#8A2BE2,#D8B4FE,#000)] bg-[length:200%_100%] bg-clip-text text-transparent text-xl font-bold tracking-[.35em] uppercase">
+                LAND CRUISER
+            </a>
+
+            <a href="/auth/login"
+                class="rounded-full bg-violet-600 px-5 py-2 hover:bg-violet-500 transition">
+            Login
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- Login Card -->
+
+    <div class="relative z-20 flex h-fit items-center justify-center px-6">
+
+        <div
+            class="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-[0_0_40px_rgba(138,43,226,.2)] p-10">
+
+            <h2
+                class="text-center text-4xl font-semibold bg-[linear-gradient(90deg,#fff,#D8B4FE,#8A2BE2)] bg-clip-text text-transparent">
+                Register
+            </h2>
+
+         <form action="/auth/register" method="POST" class="space-y-4 mt-6">
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Full Name"
+        class="w-full rounded-xl bg-black/40 border border-white/10 px-5 py-3 outline-none focus:border-violet-500">
+
+    <input
+        type="email"
+        name="email"
+        placeholder="Email Address"
+        class="w-full rounded-xl bg-black/40 border border-white/10 px-5 py-3 outline-none focus:border-violet-500">
+
+    <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        class="w-full rounded-xl bg-black/40 border border-white/10 px-5 py-3 outline-none focus:border-violet-500">
+
+    <input
+        type="text"
+        name="profilePic"
+        placeholder="Profile Pic"
+        class="w-full rounded-xl bg-black/40 border border-white/10 px-5 py-3 outline-none focus:border-violet-500">
+
+    <button
+        class="w-full rounded-xl bg-violet-600 py-3 font-semibold hover:bg-violet-500 transition">
+        Create Account
+    </button>
+
+</form>
+
+<p class="mt-6 text-center text-gray-400">
+
+    Already have an account?
+
+    <a href="/auth/login"
+        class="text-violet-400 hover:text-violet-300">
+        Login
+    </a>
+
+</p>
+           
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

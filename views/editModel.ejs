@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Model — Land Cruiser Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-black text-white">
+    <header class="border-b border-white/10 bg-black/80">
+      <div class="mx-auto max-w-7xl px-6 py-5">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-lg font-semibold uppercase tracking-[0.35em] text-amber-300" style="font-family: 'Cormorant Garamond', serif">LAND CRUISER</a>
+          <div class="flex items-center gap-6">
+            <span class="text-sm text-white/70">Admin: <strong><%= admin.name %></strong></span>
+            <a href="/auth/logout" class="inline-flex items-center justify-center rounded-full border border-white/10 px-4 py-2 text-sm text-white/80 hover:border-amber-200 transition">Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-6 py-12">
+      <div class="mb-8">
+        <a href="/secure/admin" class="text-amber-300 hover:underline text-sm">← Back to Dashboard</a>
+        <h1 class="text-3xl font-light sm:text-4xl mt-4" style="font-family: 'Cormorant Garamond', serif">Edit Model</h1>
+        <p class="mt-2 text-white/70">Update <strong><%= model.modelName %></strong> specifications and details</p>
+      </div>
+
+     <form
+  action="/secure/model/<%= model._id %>"
+  method="POST"
+  class="rounded-2xl border border-white/10 bg-slate-900/40 p-8 space-y-6"
+><!-- Basic Information -->
+        <div class="pb-6 border-b border-white/10">
+          <h3 class="text-lg font-semibold mb-4">Basic Information</h3>
+          
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Model Name <span class="text-red-400">*</span></label>
+              <input type="text" name="modelName" value="<%= model.modelName %>" required class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">URL Slug <span class="text-red-400">*</span></label>
+              <input type="text" name="slug" value="<%= model.slug %>" required class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-sm text-white/80 font-semibold">Tagline</label>
+              <input type="text" name="tagline" value="<%= model.tagline %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-sm text-white/80 font-semibold">Description <span class="text-red-400">*</span></label>
+              <textarea name="description" rows="4" required class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400"><%= model.description %></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & Year -->
+        <div class="pb-6 border-b border-white/10">
+          <h3 class="text-lg font-semibold mb-4">Pricing & Year</h3>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Price <span class="text-red-400">*</span></label>
+              <input type="number" name="price" value="<%= model.price %>" required step="0.01" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Currency</label>
+              <select name="currency" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                <option value="INR" <%= model.currency === 'INR' ? 'selected' : '' %>>INR</option>
+                <option value="USD" <%= model.currency === 'USD' ? 'selected' : '' %>>USD</option>
+                <option value="EUR" <%= model.currency === 'EUR' ? 'selected' : '' %>>EUR</option>
+                <option value="GBP" <%= model.currency === 'GBP' ? 'selected' : '' %>>GBP</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Year <span class="text-red-400">*</span></label>
+              <input type="number" name="year" value="<%= model.year %>" required class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Image URL <span class="text-red-400">*</span></label>
+              <input type="url" name="image" value="<%= model.image %>" required class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="pb-6 border-b border-white/10">
+          <h3 class="text-lg font-semibold mb-4">Specifications</h3>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Engine</label>
+              <input type="text" name="engine" value="<%= model.engine %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Horsepower</label>
+              <input type="number" name="horsepower" value="<%= model.horsepower %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Torque</label>
+              <input type="text" name="torque" value="<%= model.torque %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Mileage</label>
+              <input type="text" name="mileage" value="<%= model.mileage %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Top Speed</label>
+              <input type="number" name="topSpeed" value="<%= model.topSpeed %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Seating Capacity</label>
+              <input type="number" name="seatingCapacity" value="<%= model.seatingCapacity %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Transmission</label>
+              <select name="transmission" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                <option value="Automatic" <%= model.transmission === 'Automatic' ? 'selected' : '' %>>Automatic</option>
+                <option value="Manual" <%= model.transmission === 'Manual' ? 'selected' : '' %>>Manual</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Fuel Type</label>
+              <select name="fuelType" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                <option value="Diesel" <%= model.fuelType === 'Diesel' ? 'selected' : '' %>>Diesel</option>
+                <option value="Petrol" <%= model.fuelType === 'Petrol' ? 'selected' : '' %>>Petrol</option>
+                <option value="Hybrid" <%= model.fuelType === 'Hybrid' ? 'selected' : '' %>>Hybrid</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Color</label>
+              <input type="text" name="color" value="<%= model.color %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+
+            <div>
+              <label class="block text-sm text-white/80 font-semibold">Drive Type</label>
+              <input type="text" name="driveType" value="<%= model.driveType %>" class="mt-2 w-full rounded-lg bg-black/60 border border-white/10 px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="pb-6">
+          <h3 class="text-lg font-semibold mb-4">Status</h3>
+
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="featured" value="true" <%= model.featured ? 'checked' : '' %> class="w-4 h-4 rounded bg-black/60 border border-white/10 cursor-pointer accent-amber-400" />
+              <span class="text-sm text-white/80">Mark as Featured</span>
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" name="available" value="true" <%= model.available ? 'checked' : '' %> class="w-4 h-4 rounded bg-black/60 border border-white/10 cursor-pointer accent-amber-400" />
+              <span class="text-sm text-white/80">Available for Purchase</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex gap-3 pt-6">
+          <button type="submit" class="flex-1 inline-flex items-center justify-center rounded-lg bg-amber-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-amber-300 transition">Update Model</button>
+          <a href="/secure/admin" class="flex-1 inline-flex items-center justify-center rounded-lg border border-white/10 px-6 py-3 text-sm text-white/80 hover:border-amber-200 transition">Cancel</a>
+        </div>
+      </form>
+    </main>
+
+    <footer class="border-t border-white/5 bg-black/95 mt-12">
+      <div class="mx-auto max-w-7xl px-6 py-8 text-center text-sm text-white/60">© 2025 Signature Edition Land Cruiser — All rights reserved.</div>
+    </footer>
+
+    
+  </body>
+</html>
