@@ -166,15 +166,6 @@ While building this project, I improved my skills in:
 
 ---
 
-## 👨‍💻 Author
-
-**Samrat Ojha**
-
-- GitHub: https://github.com/your-github
-- LinkedIn: https://linkedin.com/in/your-linkedin
-
----
-
 ## ⭐ Support
 
 If you like this project, don't forget to ⭐ star the repository.
